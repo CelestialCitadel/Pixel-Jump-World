@@ -2,7 +2,7 @@
 
 void main() {
 	std::cout << "Hello Coders";
-	std::cout << "Hello Coders Again";
+	std::cout << "Hello Coders";
 	std::cin.get();
 	
 }
