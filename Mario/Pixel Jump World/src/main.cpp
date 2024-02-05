@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "../headers/common.hpp"
+#include "../headers/Mario.hpp"
 
 int main()
 {
@@ -16,6 +17,8 @@ int main()
     std::chrono::time_point<std::chrono::steady_clock> prev_time;
 
     prev_time = std::chrono::steady_clock::now();
+
+    Mario mario;
 
     // ========================= Main game loop =========================
     while (window.isOpen())
@@ -47,13 +50,12 @@ int main()
 
             if (FRAME_DURATION > lag)
             {
-                window.clear();
                 // ========================= Render or Draw =========================
-                window.draw(circle);
+                window.clear(sf::Color(0,219,255));
+                mario.draw(window);
                 window.display();
 
             }
-
         }
     }
 
