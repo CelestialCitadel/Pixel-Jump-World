@@ -159,11 +159,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\DrawMap.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Mario.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\common.hpp" />
+    <ClInclude Include="headers\DrawMap.hpp" />
     <ClInclude Include="headers\Mario.hpp" />
   </ItemGroup>
   <ItemGroup>

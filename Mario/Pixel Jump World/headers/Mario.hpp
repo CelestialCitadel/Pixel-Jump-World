@@ -12,4 +12,5 @@ private:
 public:
     Mario();
     void draw(sf::RenderWindow& window);
+    void update();
 };

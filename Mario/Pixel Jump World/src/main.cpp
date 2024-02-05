@@ -1,3 +1,4 @@
+#include <array>
 #include <chrono>
 #include <SFML/Graphics.hpp>
 
@@ -9,16 +10,26 @@ int main()
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH * SCREEN_RESIZE_FACTOR, SCREEN_HEIGHT * SCREEN_RESIZE_FACTOR), "Super Mario Bros!");
     //window.setView(sf::View(sf::FloatRect(0, -CELL_SIZE, CELL_SIZE * MAP_WIDTH, FONT_HEIGHT + (CELL_SIZE + 1) * MAP_HEIGHT)));
 
-    sf::CircleShape circle(50.f);
-    circle.setFillColor(sf::Color::Red);
-    circle.setPosition(sf::Vector2f(0.f, 0.f));
-
     unsigned lag = 0;
     std::chrono::time_point<std::chrono::steady_clock> prev_time;
 
     prev_time = std::chrono::steady_clock::now();
+    sf::Color background_color = sf::Color(92, 148, 252, 1);
+
+    sf::Texture map_texture;
+    map_texture.loadFromFile("resources/Images/Map.png");
+
+    Map map(SCREEN_WIDTH / CELL_SIZE);
 
     Mario mario;
+
+    for (unsigned short a = 0; a < map.size(); a++)
+    {
+        for (unsigned short b = map[a].size() - 2; b < map[a].size(); b++)
+        {
+            map[a][b] = Cell::Wall;
+        }
+    }
 
     // ========================= Main game loop =========================
     while (window.isOpen())
@@ -51,8 +62,9 @@ int main()
             if (FRAME_DURATION > lag)
             {
                 // ========================= Render or Draw =========================
-                window.clear(sf::Color(0,219,255));
+                window.clear(background_color);
                 mario.draw(window);
+                mario.update();
                 window.display();
 
             }
