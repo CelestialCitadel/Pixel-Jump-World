@@ -4,6 +4,7 @@
 
 #include "../headers/common.hpp"
 #include "../headers/Mario.hpp"
+#include "../headers/DrawMap.hpp"
 
 int main()
 {
@@ -16,12 +17,31 @@ int main()
     prev_time = std::chrono::steady_clock::now();
     sf::Color background_color = sf::Color(92, 148, 252, 1);
 
-    sf::Texture map_texture;
-    map_texture.loadFromFile("resources/Images/Map.png");
+    sf::Texture floor_texture;
+    floor_texture.loadFromFile("resources/Images/floorImage.png");
 
     Map map(SCREEN_WIDTH / CELL_SIZE);
 
     Mario mario;
+
+    for (unsigned short a = 0; a < map.size(); a++)
+    {
+        for (unsigned short b = 0; b < map[a].size(); b++)
+        {
+            // Assuming initially all cells are empty
+            map[a][b] = Cell::Empty;
+        }
+    }
+
+    // Set a specific area of the map to be the floor
+    for (unsigned short a = map.size() - 4; a < map.size(); a++)
+    {
+        for (unsigned short b = 0; b < map[a].size(); b++)
+        {
+            // Set the last 4 rows of the map to be the floor
+            map[a][b] = Cell::Floor;
+        }
+    }
 
     for (unsigned short a = 0; a < map.size(); a++)
     {
@@ -63,6 +83,7 @@ int main()
             {
                 // ========================= Render or Draw =========================
                 window.clear(background_color);
+                draw_map(window, floor_texture, map);
                 mario.draw(window);
                 mario.update();
                 window.display();

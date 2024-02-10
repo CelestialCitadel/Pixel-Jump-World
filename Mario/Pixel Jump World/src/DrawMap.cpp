@@ -5,21 +5,20 @@
 #include "../headers/common.hpp"
 #include "../headers/DrawMap.hpp"
 
-void draw_map(sf::RenderWindow& i_window, const sf::Texture& i_map_texture, const Map& i_map)
+void draw_map(sf::RenderWindow& window, const sf::Texture& floor_texture, const Map& map)
 {
-    sf::Sprite cell_sprite(i_map_texture);
+    sf::Sprite floor_sprite(floor_texture);
 
-    for (unsigned short a = 0; a < i_map.size(); a++) 
+    for (unsigned short row = 0; row < map.size(); ++row)
     {
-        for (unsigned short b = 0; b < i_map[a].size(); b++) 
+        for (unsigned short col = 0; col < map[row].size(); ++col)
         {
-            if (Cell::Empty == i_map[a][b]) 
+            if (map[row][col] == Cell::Floor)
             {
-                continue;
-            }
+                floor_sprite.setPosition(col * CELL_SIZE, row * CELL_SIZE);
 
-            cell_sprite.setPosition(CELL_SIZE * a, CELL_SIZE * b);
-            i_window.draw(cell_sprite);
+                window.draw(floor_sprite);
+            }
         }
     }
 }

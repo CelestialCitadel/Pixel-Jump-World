@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 // blocks
 static constexpr unsigned char CELL_SIZE = 16;
@@ -19,7 +20,8 @@ static constexpr unsigned short FRAME_DURATION = 16667;
 enum Cell
 {
     Empty,
-    Wall
+    Wall,
+    Floor
 };
 
 typedef std::vector <std::array<Cell, SCREEN_HEIGHT / CELL_SIZE>> Map;
